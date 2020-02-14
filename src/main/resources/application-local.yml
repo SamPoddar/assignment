@@ -1,0 +1,21 @@
+spring: 
+  data: 
+    mongodb: 
+      uri: ${MONGO_URI:mongodb://localhost:27017/productsDB}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: 
+  cache: 
+    product-list: all-products
+  kafka: 
+    bootstrap-servers:  ${KAFKA_BROKER:localhost:9092}
+    consumer: 
+      group-id: message-group
+    topics: 
+      cache-updates: ${TOPIC_NAME:productsCDC.productsDB.products}
+server:
+  port: 8080
+management:
+  security:
+    enabled: false

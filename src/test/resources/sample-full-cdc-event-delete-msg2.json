@@ -1,0 +1,17 @@
+{
+	"key": {
+		"schema": {
+			"type": "struct",
+			"fields": [{
+				"type": "string",
+				"optional": false,
+				"field": "id"
+			}],
+			"optional": false,
+			"name": "productsCDC.productsDB.products.Key"
+		},
+		"payload": {
+			"id": "\"p5\""
+		}
+	}
+}

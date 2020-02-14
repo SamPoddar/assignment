@@ -1,0 +1,71 @@
+pipeline {
+   agent { 
+    node { label 'maven' }      
+ }
+  environment {
+	def readContent = readJSON file: './devops/env.json'
+        componentName = "${readContent['component_name']}"
+        projectName = "${readContent['project_name']}"
+       builderImage = "springboot-maven3-centos";
+        databasetemplate="postgresql-ephemeral-order-management";
+        binaryArtifact = readMavenPom().getArtifactId()
+        binaryArtifactId = readMavenPom().getVersion()
+  } 
+  stages {
+    stage('Build App') {
+  
+      steps {
+       script{      
+       sh "mvn install -DskipTests=true"
+       }
+      }
+    }
+   stage(' Unit Test') {
+
+      steps {
+       script{      
+          sh "mvn test"
+         }
+      }  
+    }
+ 
+    stage('Code Analysis') {
+
+      steps {
+        withSonarQubeEnv('sonarscanner') {
+       sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar -f pom.xml -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.projectKey="$projectkey" -Dsonar.language=$language -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.tests=. -Dsonar.test.inclusions=**/*Test*/* -Dsonar.exclusions=target/**/*.class'
+      }
+    
+     }
+    } 
+    
+     stage('Create Image') {
+  
+    } 
+    
+    stage('Deploy MONGODB') {
+    
+	}
+	 
+	  
+stage('Deploy Redis') {
+    
+	}	  
+	  
+	  
+	  
+	
+   stage('Deploy kafka') {
+    }	  
+	  	  
+	  
+    
+    
+    stage('Deploy Application') {
+          }
+    }
+    
+    stage('Tag Image') {
+
+	
+    }

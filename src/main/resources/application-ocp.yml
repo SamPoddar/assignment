@@ -1,0 +1,25 @@
+spring: 
+  data: 
+    mongodb: 
+      host: ${MONGODB_HOST:catalogdbservice}
+      port: ${MONGODB_PORT:27017}
+      password: ${MONGODB_PASSWORD:catalogpwd} 
+      username: ${MONGODB_USERNAME:cataloguser}
+      database:  ${MONGODB_DATABASE:productsDB}
+  redis:
+    host: ${REDIS_HOST:redis-product-store}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:estore}
+  cache: 
+    product-list: all-products
+  kafka: 
+    bootstrap-servers: ${KAFKA_BROKER:kafka:9092}
+    consumer: 
+      group-id: message-group
+    topics: 
+      cache-updates: ${TOPIC_NAME:productsCDC.productsDB.products}
+server:
+  port: 8080
+management:
+  security:
+    enabled: false

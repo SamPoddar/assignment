@@ -1,0 +1,28 @@
+spring:  
+  application:
+    name: dse-event-router-service
+  profiles:
+    active: ocp
+endpoints:
+  health:
+    enabled: true
+  metrics:
+    enabled: true
+
+security:
+  basic:
+    enabled: false
+  encryption:
+    enabled: true
+    encryptionpath:
+    aesmkeyfile: "src/main/resources/aesSymKey.key"
+    desmkeyfile: "src/main/resources/desSymKey.key"
+    secconfig: "src/main/resources/secureConfig.json"
+
+management: 
+  security: 
+    enabled: false
+   
+audit:
+  enabled: false
+  db: false

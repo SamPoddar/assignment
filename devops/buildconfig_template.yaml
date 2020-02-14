@@ -1,0 +1,35 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: "jenkins-buildconfig-template"
+objects:
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: "${COMPONENT_NAME}"
+    spec:
+      source:
+        type: Git
+        git:
+          uri: "${SOURCE_REPOSITORY_URL}"
+        sourceSecret:
+          name: ${SOURCE_SECRET}
+  
+      strategy:
+        type: "JenkinsPipeline"
+        jenkinsPipelineStrategy:
+           jenkinsfilePath: ${JENKINS_FILE_PATH}          
+parameters:
+  - name: SOURCE_REPOSITORY_URL 
+    displayName: Source Repository URL 
+    description: The URL of the repository with your application source code 
+  - name: COMPONENT_NAME
+    description: NAME OF THE COMPONENT
+  - name: JENKINS_FILE_PATH
+    description: Path of the Jenkinsfile
+    value: devops/Jenkinsfile
+  - name: SOURCE_SECRET
+    description: source secret
+    value: ref-impl-2-1-estore
+labels:
+  template: "jenkins-buildconfig-template"

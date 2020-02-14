@@ -1,0 +1,10 @@
+{
+ 	"_id": {
+ 		"$oid": "5dc8f4e411478c0bab35faf3"
+ 	},
+ 	"productId": "p_new",
+ 	"productName": "prd-name2",
+ 	"partNo": "partno01",
+ 	"imageLink": "http://temp",
+ 	"productShortDesc": "good-product"
+}
