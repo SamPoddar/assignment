@@ -23,7 +23,7 @@
 		<prometheus.version>0.0.25</prometheus.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<basedir>cache-manager-cdc</basedir>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
